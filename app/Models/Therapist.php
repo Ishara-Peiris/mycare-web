@@ -23,7 +23,10 @@ class Therapist extends Model
         'is_verified',
         'availability',
         'description',
-        'image'
+        'image',
+        'certificate_path',
+        'ocr_summary',      // <-- ADD THIS
+    'is_keyword_found',
     ];
 
     protected $casts = [

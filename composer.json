@@ -10,10 +10,11 @@
         "cloudinary-labs/cloudinary-laravel": "^3.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
-        "livewire/livewire": "^3.6.4",
+        "livewire/livewire": "^3.6",
         "livewire/volt": "^1.7.0",
         "munafio/chatify": "^1.6",
         "pusher/pusher-php-server": "^7.2",
+        "spatie/laravel-permission": "^6.21",
         "usamamuneerchaudhary/commentify": "^1.5"
     },
     "require-dev": {

@@ -7,13 +7,13 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-
 class BookingNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $booking;        // Booking model instance
     public $recipientType;  // 'therapist' or 'patient'
+    public $meetingLink;    // Meeting link
 
     /**
      * Create a new message instance.
@@ -25,6 +25,7 @@ class BookingNotification extends Mailable
     {
         $this->booking = $booking;
         $this->recipientType = $recipientType;
+        $this->meetingLink = $booking->meeting_link ?? null; // Add meeting link
     }
 
     /**
@@ -41,6 +42,7 @@ class BookingNotification extends Mailable
                     ->with([
                         'booking' => $this->booking,
                         'recipientType' => $this->recipientType,
+                        'meetingLink' => $this->meetingLink, // Pass meeting link
                     ]);
     }
 }

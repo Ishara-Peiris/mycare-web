@@ -16,4 +16,10 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
-    })->create();
+    })
+    ->withProviders([
+        // START: Manual Service Provider Registration
+        \Usamamuneerchaudhary\Commentify\Providers\CommentifyServiceProvider::class,
+        // END: Manual Service Provider Registration
+    ])
+    ->create();

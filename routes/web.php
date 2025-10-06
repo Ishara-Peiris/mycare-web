@@ -11,9 +11,14 @@ use App\Http\Controllers\PostController;
 use App\Models\Therapist;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\VedioController;
+use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\Admin\TherapistController as AdminTherapistController;
+
+
 
 
 use App\Http\Controllers\AvailabilityController;
+use App\Http\Controllers\HomeController;
 
 
 
@@ -116,3 +121,43 @@ Route::get('/video', function () {
 Route::get('/therapist/bookings', [TherapistController::class, 'myBookings'])
      ->middleware('auth')
      ->name('therapist.bookings');
+
+
+
+    
+
+Route::get('/bookings/{booking}/join', [BookingController::class, 'joinSession'])->name('bookings.join');
+
+
+
+Route::get('/therapist/calendar', [CalendarController::class, 'index'])->name('therapist.calendar');
+Route::get('/therapist/calendar/events', [CalendarController::class, 'getEvents'])->name('therapist.calendar.events');
+
+
+
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    Route::get('/therapists', [AdminTherapistController::class, 'index'])->name('admin.therapists');
+    Route::get('/therapists/{therapist}', [AdminTherapistController::class, 'show'])->name('admin.therapists.show');
+    Route::post('/therapists/{therapist}/approve', [AdminTherapistController::class, 'approve'])->name('admin.therapists.approve');
+    Route::post('/therapists/{therapist}/reject', [AdminTherapistController::class, 'reject'])->name('admin.therapists.reject');
+});
+
+// routes/web.php
+
+
+// Step 1: User selects payment method (new view/action)
+Route::post('/bookings/initiate', [BookingController::class, 'selectPaymentMethod'])->name('bookings.select_payment'); 
+
+// --- Stripe Routes ---
+// Step 2a: Redirect to Stripe Checkout
+Route::post('/payment/stripe/checkout', [BookingController::class, 'stripeCheckout'])->name('stripe.checkout');
+// Step 3a: Success/Failure redirect from Stripe
+Route::get('/payment/stripe/success', [BookingController::class, 'stripeSuccess'])->name('stripe.success');
+Route::get('/payment/stripe/cancel', [BookingController::class, 'stripeCancel'])->name('stripe.cancel');
+
+// --- Bank Deposit Routes ---
+// Step 2b: Process Bank Deposit Request
+Route::post('/payment/bank-deposit', [BookingController::class, 'bankDeposit'])->name('bank.deposit');
+
+
+Route::get('/home2', [HomeController::class, 'index'])->name('home2.show');

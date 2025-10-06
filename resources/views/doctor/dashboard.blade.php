@@ -81,7 +81,9 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <h3>Doctor Panel</h3>
-            <a href="#" class="active"><i class="fas fa-calendar-plus me-2"></i>Add Time Slots</a>
+            <a href="{{ route('availabilities.create') }}"><i class="fas fa-calendar-plus me-2"></i>Add Time Slots</a>
+            <a href="{{ route('therapist.bookings') }}"><i class="fas fa-calendar-alt me-2"></i>My Bookings</a>
+            <a href="{{ route('therapist.calendar') }}"><i class="fas fa-calendar me-2"></i>My Calendar</a>
             <a href="#"><i class="fas fa-comments me-2"></i>Join Discussion</a>
             <a href="#"><i class="fas fa-folder-plus me-2"></i>Add Resources</a>
             <a href="#"><i class="fas fa-user-circle me-2"></i>Profile</a>
@@ -95,16 +97,17 @@
                     <!-- Profile Card -->
                     <div class="col-lg-4 mb-4">
                         <div class="profile-card">
-                            <img src="{{ asset('storage/resources/cardimg.jpg') }}" alt="Doctor">
-                            <h4>Dr. Ishara Peiris</h4>
-                            <p>Specialist in Mental Health</p>
-                            <button class="btn btn-purple mt-2"><i class="fas fa-edit me-1"></i>Edit Profile</button>
+                            <img src="{{ $therapist->profile_image ? asset('storage/'.$therapist->profile_image) : asset('storage/resources/cardimg.jpg') }}" alt="Doctor">
+                            <h4>{{ $therapist->user->name }}</h4>
+                            <p>{{ $therapist->specialty ?? 'Specialist in Mental Health' }}</p>
+                            <a href="#" class="btn btn-purple mt-2"><i class="fas fa-edit me-1"></i>Edit Profile</a>
                         </div>
                     </div>
 
-                    <!-- Dashboard Widgets -->
+                    <!-- Dashboard Cards -->
                     <div class="col-lg-8">
                         <div class="row g-4">
+
                             <div class="col-md-6">
                                 <div class="card shadow-sm border-0 p-4">
                                     <h5><i class="fas fa-calendar-plus text-purple me-2"></i>Add Time Slots</h5>
@@ -112,6 +115,15 @@
                                     <a href="{{ route('availabilities.create') }}" class="btn btn-purple btn-sm">Manage</a>
                                 </div>
                             </div>
+
+                            <div class="col-md-6">
+                                <div class="card shadow-sm border-0 p-4">
+                                    <h5><i class="fas fa-calendar-alt text-purple me-2"></i>My Calendar</h5>
+                                    <p class="text-muted">View all your upcoming sessions in a calendar view.</p>
+                                    <a href="{{ route('therapist.calendar') }}" class="btn btn-purple btn-sm">View Calendar</a>
+                                </div>
+                            </div>
+
                             <div class="col-md-6">
                                 <div class="card shadow-sm border-0 p-4">
                                     <h5><i class="fas fa-comments text-purple me-2"></i>Join Discussion</h5>
@@ -119,6 +131,7 @@
                                     <a href="#" class="btn btn-purple btn-sm">Join Now</a>
                                 </div>
                             </div>
+
                             <div class="col-md-6">
                                 <div class="card shadow-sm border-0 p-4">
                                     <h5><i class="fas fa-folder-plus text-purple me-2"></i>Add Resources</h5>
@@ -126,19 +139,12 @@
                                     <a href="#" class="btn btn-purple btn-sm">Upload</a>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="card shadow-sm border-0 p-4">
-                                    <h5><i class="fas fa-user-circle text-purple me-2"></i>Profile</h5>
-                                    <p class="text-muted">Update your profile and professional details.</p>
-                                    <a href="#" class="btn btn-purple btn-sm">Update</a>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- Font Awesome & Bootstrap JS -->

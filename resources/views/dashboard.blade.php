@@ -215,7 +215,7 @@
             <div class="quick-access-card-content">
                 <h3>Join Discussion</h3>
                 <p>Engage with others on topics of mental wellness and self-care.</p>
-                <a href="{{ route('resources.categories') }}">View Resources</a>
+            <a href="{{ route('home2.show') }}">Join Now</a>
             </div>
         </div>
     </section>

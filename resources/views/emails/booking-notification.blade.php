@@ -15,6 +15,11 @@
     <p><strong>Date:</strong> {{ \Carbon\Carbon::parse($booking->session_date)->format('M d, Y') }}</p>
     <p><strong>Time:</strong> {{ \Carbon\Carbon::parse($booking->session_time)->format('h:i A') }}</p>
 
+    @if(isset($meetingLink))
+        <p><strong>Join your session here:</strong></p>
+        <p><a href="{{ $meetingLink }}" target="_blank">{{ $meetingLink }}</a></p>
+    @endif
+
     <p>Thank you!</p>
 </body>
 </html>

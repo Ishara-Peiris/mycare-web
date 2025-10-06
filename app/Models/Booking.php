@@ -9,7 +9,10 @@ use App\Models\User;
 
 class Booking extends Model
 {
-     protected $fillable = ['user_id','therapist_id','session_date','session_time','status'];
+     protected $fillable = ['user_id','therapist_id','session_date','session_time','status','meeting_link','status', // Now accepts 'unpaid', 'pending', 'confirmed', 'failed'
+        'payment_method', // e.g., 'stripe', 'bank_deposit'
+        'transaction_id', // Stripe Session ID or Deposit Reference
+        'amount_paid',] ;// The fee;
 
     public function user()
     {

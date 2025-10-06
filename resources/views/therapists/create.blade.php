@@ -59,6 +59,14 @@
               <label class="form-label">Description / Bio</label>
               <textarea name="description" class="form-control" rows="4" placeholder="Write a short bio">{{ old('description') }}</textarea>
             </div>
+            {{-- ADD THIS NEW FIELD BLOCK --}}
+<div class="mb-3">
+    <label class="form-label">Professional Certificate/License *</label>
+    {{-- We recommend PDF for official documents, but allow common image types too --}}
+    <input type="file" name="certificate" class="form-control" required> 
+    <div class="form-text">Accepted file types: PDF, JPG, PNG (Max 5MB).</div>
+</div>
+{{-- END NEW FIELD BLOCK --}}
 
             <div class="mb-3">
               <label class="form-label">Profile Image</label>

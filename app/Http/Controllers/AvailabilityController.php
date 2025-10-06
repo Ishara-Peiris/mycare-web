@@ -24,7 +24,8 @@ class AvailabilityController extends Controller
         ]);
 
         Availability::create([
-            'therapist_id' => Auth::id(), // therapist adds their own slots
+            'therapist_id' => Auth::user()->therapist->id, // ✅ correct
+
             'available_date' => $request->available_date,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,

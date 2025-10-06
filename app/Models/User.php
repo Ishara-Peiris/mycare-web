@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Booking;
+use Spatie\Permission\Traits\HasRoles;
  
 
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable,  HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -67,6 +68,10 @@ public function isPatient()
 public function isDoctor()
 {
     return $this->role === 2;
+}
+public function therapist()
+{
+    return $this->hasOne(\App\Models\Therapist::class);
 }
 
 
